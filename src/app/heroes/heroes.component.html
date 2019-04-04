@@ -1,0 +1,66 @@
+
+<!--   <p>{{hero}}</p>      //data binding to the new hero property
+                            //then to display the HeroesComponent, add it to the template of the shell AppComponent.
+                            //like this 'src/app/app.component.html'  <app-heroes></app-heroes> /the selector element/
+
+-->
+<div *ngIf="selectedHero">
+<!--  2.1 Update the binding in the template -->
+<!--  2.1 Format with the UppercasePipe -->
+<!--      The word uppercase in the interpolation binding,
+          right after the pipe operator ( | ), activates the built-in UppercasePipe.-->
+<!--      Pipes are a good way to format strings, currency amounts, dates and other display data.
+          Angular ships with several built-in pipes and you can create your own.
+
+      5.4 Update the template with the new selectedHero property.
+-->
+<!--<h2>{{hero.name | uppercase}} Details</h2>-->
+<h2>{{selectedHero.name | uppercase}} Details</h2>
+<!--<div><span>id: </span>{{hero.id}}</div>-->
+<div><span>id: </span>{{selectedHero.id}}</div>
+
+
+
+<!--  3.1 TWO-WAY BINDING   -> syntax:    [(ngModel)]="xxx"
+          Users should be able to edit the hero name in an <input> textbox.
+          The textbox should both display the hero's name property and update that property as the user types.
+          To automate that data flow, setup a two-way data binding between the <input> form element and the hero.name property.
+          [(ngModel)]  binds the hero.name property to the HTML textbox so that data can flow in both directions:
+                       from the hero.name property to the textbox, and from the textbox back to the hero.name.
+
+      3.2 app stopped working:  Although ngModel is a valid Angular directive, it isn't available by default.
+                                It belongs to the optional FormsModule and you must opt-in to using it.
+           Go to:   app.module.ts (FormsModule symbol import)
+-->
+<div>
+  <label>name:
+    <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+  </label>
+</div>
+
+</div>
+<!-- 4.4
+     4.4.1 change the <li> tag to  <li *ngFor="let hero of heroes">
+     ***   heroes.components.ts   hero: Hero = {}
+           mock-heroes.ts         HEROES: Hero[] = [{},{},..]
+           heroes.components.ts   heroes = HEROES;
+
+           The *ngFor is Angular's repeater directive. It repeats the host element for each element in a list.
+           In this example:  <li> is the host element
+                             heroes is the list from the HeroesComponent class.
+                             hero holds the current hero object for each iteration through the list.
+           Don't forget the asterisk (*) in front of ngFor. It's a critical part of the syntax.
+
+     5.1   Add a click event binding to the <li> like this:  (click)="onSelect(hero)"
+           The () around click tell Angular to listen for the <li> element's click event.
+           When the user clicks in the <li>, Angular executes the onSelect(hero) expression.
+           onSelect() is a HeroesComponent method that you're about to write.
+                => go to src/app/heroes/heroes.component.ts to write it
+           Angular calls it with the hero object displayed in the clicked <li>, the same hero defined previously in the *ngFor expression.
+-->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>

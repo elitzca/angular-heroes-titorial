@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from "../hero";
-import { HEROES } from "../mock-heroes"            // 4.2  import the mock HEROES
+import { Hero } from '../hero';
+import { HEROES } from '../mock-heroes';            // 4.2  import the mock HEROES
 
 @Component({                                       // The CLI generated three metadata properties:
   selector: 'app-heroes',                          // selector— the component's CSS element selector
